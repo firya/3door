@@ -6,6 +6,8 @@ const url = require('url');
 const PuppeteerBrowser = require('./puppeteer/puppeteerBrowser.js');
 const Watermark = require('./watermark/watermark.js');
 
+console.log(123)
+
 var puppeteerBrowser = new PuppeteerBrowser();
 puppeteerBrowser.createPuppeteer();
 
