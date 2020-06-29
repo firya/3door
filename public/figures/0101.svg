@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="200px" viewBox="0 0 80 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>0101</title>
+    <desc>Created with Sketch.</desc>
+    <g id="0101" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="base" fill="#888888" x="0" y="0" width="80" height="200"></rect>
+        <path d="M80,0 L80,200 L0,200 L0,0 L80,0 Z M67.5,15 L12.5,15 C12.2238576,15 12,15.2238576 12,15.5 L12,15.5 L12,183.5 C12,183.776142 12.2238576,184 12.5,184 L12.5,184 L67.5,184 C67.7761424,184 68,183.776142 68,183.5 L68,183.5 L68,15.5 C68,15.2238576 67.7761424,15 67.5,15 L67.5,15 Z" id="main" fill="#FFFFFF"></path>
+        <path d="M13.5,16 L66.5,16 C66.7761424,16 67,16.2238576 67,16.5 L67,48 L13,48 L13,16.5 C13,16.2238576 13.2238576,16 13.5,16 Z" id="panel" fill="#FFFFFF"></path>
+        <polygon id="panel" fill="#FFFFFF" points="13 49.75 67 49.75 67 81.75 13 81.75"></polygon>
+        <polygon id="panel" fill="#FFFFFF" points="13 83.5 67 83.5 67 115.5 13 115.5"></polygon>
+        <polygon id="panel" fill="#FFFFFF" points="13 117.25 67 117.25 67 149.25 13 149.25"></polygon>
+        <path d="M13,151 L67,151 L67,182.5 C67,182.776142 66.7761424,183 66.5,183 L13.5,183 C13.2238576,183 13,182.776142 13,182.5 L13,151 Z" id="panel" fill="#FFFFFF"></path>
+        <circle id="peephole" fill="#516DBF" cx="40" cy="55.5" r="1.5"></circle>
+    </g>
+</svg>

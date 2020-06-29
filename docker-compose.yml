@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  node:
+    build: .
+    container_name: "${CONTAINER_NAME}_node"
+    volumes:
+      - ./public:/home/node/app
+    restart: unless-stopped
+    environment:
+      - VIRTUAL_HOST=$VIRTUAL_HOST
+      - LETSENCRYPT_HOST=$LETSENCRYPT_HOST
+      - LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL
+      - NODE_ENV=$NODE_ENV
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

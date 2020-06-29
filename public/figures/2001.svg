@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="160px" height="200px" viewBox="0 0 160 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>2001</title>
+    <desc>Created with Sketch.</desc>
+    <g id="2001" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="main" fill="#FFFFFF" x="80" y="0" width="80" height="200"></rect>
+        <rect id="main" fill="#FFFFFF" x="0" y="0" width="80" height="200"></rect>
+        <circle id="peephole" fill="#516DBF" cx="120.5" cy="51.5" r="1.5"></circle>
+    </g>
+</svg>
