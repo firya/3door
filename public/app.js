@@ -6,6 +6,8 @@ const url = require('url');
 const PuppeteerBrowser = require('./puppeteer/puppeteerBrowser.js');
 const Watermark = require('./watermark/watermark.js');
 
+const SECRET_URL = '182nKJfh8231bhdja176t38bf3888NBv237';
+
 var puppeteerBrowser = new PuppeteerBrowser();
 puppeteerBrowser.createPuppeteer();
 
@@ -16,13 +18,13 @@ app.use(express.static(path));
 app.use('/', router);
 
 router.get('/', function (req, res) {
-  if (process.env.NODE_ENV == 'development') {
-    res.sendFile('index.html', {
-      root: './views'
-    });
-  } else {
-    res.sendStatus(200);
-  }
+  res.sendStatus(200);
+});
+
+router.get(`/redactor${SECRET_URL}`, function (req, res) {
+  res.sendFile('index.html', {
+    root: './views'
+  });
 });
 
 app.get("/screenshot", async (request, response) => {
@@ -31,7 +33,7 @@ app.get("/screenshot", async (request, response) => {
 
   const windowHeight = queryParams.sh || 300;
 
-  var pageUrl = `http://localhost:8080/?${queryURL}`;
+  var pageUrl = `http://localhost:8080/redactor${SECRET_URL}?${queryURL}`;
 
   await puppeteerBrowser.openPage(pageUrl);
 
@@ -43,8 +45,11 @@ app.get("/screenshot", async (request, response) => {
     puppeteerBrowser.page.close();
 
     const im = res.split(",")[1];
+    var img = Buffer.from(im, 'base64');
 
-    var img = await Watermark.merge(Buffer.from(im, 'base64'), './static/images/watermark.png');
+    if (windowHeight >= 300) {
+      img = await Watermark.merge(Buffer.from(im, 'base64'), './static/images/watermark.png');
+    }
 
     response.writeHead(200, {
       'Content-Type': 'image/png',
