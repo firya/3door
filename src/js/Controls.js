@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useControl } from 'react-three-gui';
+import { URLToArray } from './utils.js';
 
 import allActions from './actions';
 
@@ -186,6 +187,8 @@ const ControlsGUI = () => {
   const resources = useSelector(state => state.resources);
   const lists = useSelector(state => state.lists);
 
+  var URLparams = URLToArray(window.location.search);
+
   // setParams({ size: 1, side: 'outside', invert: false, trim: true, figure: 203, material: 'pvh', texture: 72, bump: '' })
   const setParams = window.setParams = (props) => {
     Object.keys(props).map((key, i) => {
@@ -249,7 +252,7 @@ const ControlsGUI = () => {
     });
   }
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (URLparams.edit) {
     useControl('Side', {
       group: 'door',
       type: 'select',
@@ -296,17 +299,17 @@ const ControlsGUI = () => {
 
   return (
     <>
-      {process.env.NODE_ENV !== 'production' && params.size != 1 && <DoubleSidedControls />}
-      {process.env.NODE_ENV !== 'production' && params.size == 1 && <PanelFigureControl1 />}
-      {process.env.NODE_ENV !== 'production' && params.size == 1.5 && <PanelFigureControl15 />}
-      {process.env.NODE_ENV !== 'production' && params.size == 2 && <PanelFigureControl2 />}
-      {process.env.NODE_ENV !== 'production' && params.trim && <TrimControls />}
-      {process.env.NODE_ENV !== 'production' && resources.panelMaterial.type == 'pvh' && <PVHMaterialControl />}
-      {process.env.NODE_ENV !== 'production' && resources.panelMaterial.type == 'shpon' && <ShponMaterialControl />}
-      {process.env.NODE_ENV !== 'production' && resources.panelMaterial.type == 'paint' && <PaintMaterialControl />}
-      {process.env.NODE_ENV !== 'production' && resources.panelMaterial.type == 'powder' && <PowderMaterialControl />}
-      {process.env.NODE_ENV !== 'production' && resources.panelMaterial.type == 'croco' && <CrocoMaterialControl />}
-      {process.env.NODE_ENV !== 'production' && resources.panelMaterial.type == 'vinil' && <VinilMaterialControl />}
+      {URLparams.edit && params.size != 1 && <DoubleSidedControls />}
+      {URLparams.edit && params.size == 1 && <PanelFigureControl1 />}
+      {URLparams.edit && params.size == 1.5 && <PanelFigureControl15 />}
+      {URLparams.edit && params.size == 2 && <PanelFigureControl2 />}
+      {URLparams.edit && params.trim && <TrimControls />}
+      {URLparams.edit && resources.panelMaterial.type == 'pvh' && <PVHMaterialControl />}
+      {URLparams.edit && resources.panelMaterial.type == 'shpon' && <ShponMaterialControl />}
+      {URLparams.edit && resources.panelMaterial.type == 'paint' && <PaintMaterialControl />}
+      {URLparams.edit && resources.panelMaterial.type == 'powder' && <PowderMaterialControl />}
+      {URLparams.edit && resources.panelMaterial.type == 'croco' && <CrocoMaterialControl />}
+      {URLparams.edit && resources.panelMaterial.type == 'vinil' && <VinilMaterialControl />}
     </>
   );
 }

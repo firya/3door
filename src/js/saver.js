@@ -20,10 +20,7 @@ export default class Saver {
   saveImageClick = (e) => {
     e.preventDefault();
 
-    console.time("Image to blob");
-    this.saveImage().then((res) => {
-      console.timeEnd("Image to blob");
-    })
+    this.saveImage();
   }
 
   saveImage = () => {

@@ -5,6 +5,7 @@ class PuppeteerBrowser {
   constructor(w, h) {
     this.h = parseInt(h, 10) || 1024;
     this.w = parseInt(w, 10) || Math.round(this.h * (389 / 799));
+    this.SECRET_URL = '182nKJfh8231bhdja176t38bf3888NBv237';
   }
 
   createPuppeteer = async () => {
@@ -20,16 +21,35 @@ class PuppeteerBrowser {
     })
   }
 
-  batchSave = async (urlList) => {
+  batchSave = async (urlParams = [], force = false) => {
     var that = this;
 
-    for (let i = 0; i < urlList.length; i++) {
-      await that.openPage(urlList[i]).then(async res => {
-        await that.getImage().then(async res => {
-          await that.page.close();
-          await that.saveImage(res, `door_${i}`)
+    for (let i = 0; i < urlParams.length; i++) {
+
+      var trimFileName = (urlParams[i].trim) ? '_trim' : '';
+      var fileName = `door_${urlParams[i].material}_${urlParams[i].size}_${urlParams[i].figure}-${urlParams[i].texture}-${urlParams[i].bump}_${urlParams[i].side}${trimFileName}_${urlParams[i].furniture}`;
+
+      if (force || !fs.existsSync(`uploads/${fileName}.jpg`)) {
+        var url = `http://localhost:8080/redactor${this.SECRET_URL}?sh=${urlParams[i].sh}&size=${urlParams[i].size}&figure=${urlParams[i].figure}&material=${urlParams[i].material}&texture=${urlParams[i].texture}&bump=${urlParams[i].bump}&side=${urlParams[i].side}&invert=${urlParams[i].invert}&trim=${urlParams[i].trim}&furniture=${urlParams[i].furniture}`;
+
+        console.time(`Total time`);
+
+        await that.openPage(url).then(async res => {
+          var ratio = await that.getViewportRatio();
+          await that.setPageViewport(urlParams[i].sh * ratio, urlParams[i].sh);
+          await that.getImage().then(async res => {
+            await that.page.close();
+
+            console.log(`Page loaded`);
+
+            await that.saveImage(res, fileName)
+
+            console.log(`File saved ${fileName}`);
+            console.log(`${i + 1}/${urlParams.length}`)
+            console.timeEnd(`Total time`);
+          });
         });
-      });
+      }
     }
   }
 
@@ -93,7 +113,7 @@ class PuppeteerBrowser {
 
     const img = Buffer.from(im, 'base64');
 
-    fs.writeFile(`uploads/${filename}.png`, img, 'binary', function (err) {
+    fs.writeFile(`uploads/${filename}.jpg`, img, 'binary', function (err) {
       if (err) throw err
       console.log('File saved.')
     });
